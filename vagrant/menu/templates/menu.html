@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Show all Menu items for a restaurant</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+	<h1><a href={{ url_for('showRestaurants') }}>BACK TO RESTAURANTS</a>
+		Restaurant Name: {{ restaurant.name }}
+		
+		
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<ul>
+			{% for message in messages %}
+				<li> <strong> {{ message }} </strong> </li>
+			{% endfor %}
+			</ul>
+			{% endif %}
+	{% endwith %}
+		
+		
+		</br>
+		</br>
+		<a href={{ url_for('newMenuItem', restaurant_id=restaurant.id) }}>Add a new menu item</a>
+		</br>
+		</br>
+			
+		{% if items %}
+		
+			{% for i in items %}
+		
+				Menu Item Name: {{i.name}}
+		
+		</br>
+		
+				{{i.price}}
+		
+		</br>
+		<a href={{ url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=i.id, menu_item_name=i.name) }}>Edit</a>
+		</br>
+		<a href={{ url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=i.id) }}>Delete</a>
+		
+		</br></br>
+		
+			{% endfor %}
+			
+		{% else %} 
+			There are currently no menu items to display
+		{% endif %}
+	</h1>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit Menu Item</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+	<h1>  Edit Menu Item 
+	
+	<form action="{{ url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=menu_id)}}"
+	method = 'post'>
+	</br>
+	{{menu_item_name}}
+	</br>
+		<p>Enter New Name for menu item with menu id = {{menu_id}}:</p> 
+			<input type = 'text' size='30' name='name' placeholder="{{menu_item_name}}">
+			
+		<input type='submit' value='Edit'>
+		</br>
+		<a href={{ url_for('restaurantMenu', restaurant_id=restaurant_id) }}>Cancel</a>
+		
+	</form>
+	</h1>
+	
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add New Restaurant</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+	<h1>  Add a new Restaurant  </h1>
+	
+	<form action="{{ url_for('newRestaurant')}}"
+	method = 'post'>
+	
+		<p>Name: </p>
+			<input type = 'text' size='30' name='name'>
+			
+		<input type='submit' value='Create'>
+		
+	</form>
+	</br>
+	<a href={{ url_for('showRestaurants') }}>Cancel</a>
+	
+</body>
+</html>
