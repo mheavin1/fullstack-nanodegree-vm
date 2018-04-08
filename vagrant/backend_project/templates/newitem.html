@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Create a New Item</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+	<h1>  Create A new item
+	
+	<!--  flashes section -->
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<ul>
+			{% for message in messages %}
+				<li> <strong> {{ message }} </strong> </li>
+			{% endfor %}
+			</ul>
+			{% endif %}
+	{% endwith %}
+	
+	<form action="{{ url_for('newItem')}}"
+	method = 'post'>
+	</br>
+	
+	<input type = 'text' size='30' name='item_title' placeholder="Enter an Item Title">
+	</br>
+	<input type = 'text' size='30' name='description' placeholder="Enter an Item Description">
+	</br>
+	
+	
+	<select name='new_category_id' placeholder="Select a Category">
+		
+	{% for key, value in cat_dict.items() %}
+	
+	<option value="{{key}}">{{value}}</option>
+	
+	{% endfor %}
+	
+	</select>	
+	
+	<input type='submit' value='Create New Item'>
+	
+	 
+	</br>
+	
+	</h1>
+	
+</body>
+</html>

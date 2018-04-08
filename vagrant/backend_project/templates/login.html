@@ -1,0 +1,131 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
+
+    <!-- google + api -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+	</script>
+	<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+	</script>
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
+	
+</head>                           
+
+<body>
+
+
+<div class="container-fluid">
+		<header>
+			<div class="row coral-border">
+				<div class="col-md-12">
+					<!--  utilizing bootstrap jumbotron to create a header with a logo   -->
+					<div class="jumbotron jumbo-sytles">
+						<h1 class="jumbo-child-inline-block" onclick="window.location.href='/'">Sports Catalog App</h1>
+						
+							<!--  flashes section -->
+							{% with messages = get_flashed_messages() %}
+								{% if messages %}
+									<ul>
+									{% for message in messages %}
+										<li> <strong> {{ message }} </strong> </li>
+									{% endfor %}
+									</ul>
+									{% endif %}
+							{% endwith %}
+		
+						
+					</div>
+				</div>
+			</div>
+		</header>
+		
+		<main>
+				
+			
+			
+			<div class="row">
+				
+				<div class="col-md-12">
+					<div style="margin-left: 10px; margin-top: 20px">
+					<h3>Click here to sign in with Google:</h3>
+					<div id="signinButton">
+					  <span class="g-signin"
+						data-scope="openid email"
+						data-clientid={{ client_id }}
+						data-redirecturi="postmessage"
+						data-accesstype="offline"
+						data-cookiepolicy="single_host_origin"
+						data-callback="signInCallback"
+						data-approvalprompt="force">
+					  </span>
+					</div>
+
+					<div id="result"></div>
+					
+					</div>
+				</div>
+				
+			</div>
+
+		</main>
+
+	</div> <!-- container-fluid end -->
+
+
+
+
+
+<script>
+function signInCallback(authResult) {
+    //  	GOOGLE+ SIGN-IN FUNCTION:
+	
+  if (authResult['code']) {
+	alert("got here to check the code");
+    // Hide the sign-in button now that the user is authorized
+    $('#signinButton').attr('style', 'display: none');
+    // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+    $.ajax({
+      type: 'POST',
+      url: '/gconnect?state={{STATE}}',
+      processData: false,
+      data: authResult['code'],
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+         setTimeout(function() {
+          window.location.href = "/";
+         }, 4000);
+          
+		} else if (authResult['error']) {
+			console.log('There was an error: ' + authResult['error']);
+		} else {
+			$('#result').html('Failed to make a server-side call. Check your configuration and console.');
+        }
+      } // end ajax call success block
+      
+	});  // end of ajax block
+	
+  } // end if authResult 
+  
+} // end function
+
+</script>
+	
+	<!-- GOOGLE PLUS SIGN IN-->
+	
+	
+
+	
+</body>
+
+</html>

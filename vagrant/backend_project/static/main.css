@@ -1,0 +1,33 @@
+/* used inside the header jumbo */
+.jumbo-child-inline-block {
+	display: inline-block;
+}
+
+/* colors for the header jumbo */
+.jumbo-sytles {
+	background-color: white;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+/* borders for the header jumbo */
+.coral-border {
+	border-bottom: 2px solid coral;
+}
+
+/* font size for content in the main body of page */
+.main-body-content {
+	font-size: 1.5em;
+	margin-top: 25px;
+}
+
+/* font size for content in the main body of page */
+.main-body-content {
+	font-size: 1.5em;
+	margin-top: 25px;
+}
+
+/* footer */
+.why {
+	margin-left: 25px;
+}
